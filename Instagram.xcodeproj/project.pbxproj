@@ -9,21 +9,31 @@
 /* Begin PBXBuildFile section */
 		F254942F2564DD390096074D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F254942E2564DD390096074D /* AppDelegate.swift */; };
 		F25494312564DD390096074D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494302564DD390096074D /* SceneDelegate.swift */; };
-		F25494332564DD390096074D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494322564DD390096074D /* ViewController.swift */; };
 		F25494362564DD390096074D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25494342564DD390096074D /* Main.storyboard */; };
 		F25494382564DD3B0096074D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F25494372564DD3B0096074D /* Assets.xcassets */; };
 		F254943B2564DD3B0096074D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F25494392564DD3B0096074D /* LaunchScreen.storyboard */; };
+		F25494432564DE730096074D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494422564DE730096074D /* LoginViewController.swift */; };
+		F25494452564DE8B0096074D /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494442564DE8B0096074D /* HomeViewController.swift */; };
+		F25494472564DEA40096074D /* ImageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494462564DEA40096074D /* ImageSelectViewController.swift */; };
+		F25494492564DECF0096074D /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25494482564DECF0096074D /* PostViewController.swift */; };
+		F254944B2564DEEF0096074D /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F254944A2564DEEF0096074D /* SettingViewController.swift */; };
+		F254944D2564E4820096074D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F254944C2564E4820096074D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F254942B2564DD390096074D /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F254942E2564DD390096074D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F25494302564DD390096074D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F25494322564DD390096074D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F25494352564DD390096074D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F25494372564DD3B0096074D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F254943A2564DD3B0096074D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F254943C2564DD3B0096074D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F25494422564DE730096074D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F25494442564DE8B0096074D /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F25494462564DEA40096074D /* ImageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectViewController.swift; sourceTree = "<group>"; };
+		F25494482564DECF0096074D /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		F254944A2564DEEF0096074D /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		F254944C2564E4820096074D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +68,12 @@
 			children = (
 				F254942E2564DD390096074D /* AppDelegate.swift */,
 				F25494302564DD390096074D /* SceneDelegate.swift */,
-				F25494322564DD390096074D /* ViewController.swift */,
+				F25494422564DE730096074D /* LoginViewController.swift */,
+				F25494442564DE8B0096074D /* HomeViewController.swift */,
+				F25494462564DEA40096074D /* ImageSelectViewController.swift */,
+				F25494482564DECF0096074D /* PostViewController.swift */,
+				F254944A2564DEEF0096074D /* SettingViewController.swift */,
+				F254944C2564E4820096074D /* TabBarController.swift */,
 				F25494342564DD390096074D /* Main.storyboard */,
 				F25494372564DD3B0096074D /* Assets.xcassets */,
 				F25494392564DD3B0096074D /* LaunchScreen.storyboard */,
@@ -138,7 +153,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F25494332564DD390096074D /* ViewController.swift in Sources */,
+				F25494472564DEA40096074D /* ImageSelectViewController.swift in Sources */,
+				F254944D2564E4820096074D /* TabBarController.swift in Sources */,
+				F25494452564DE8B0096074D /* HomeViewController.swift in Sources */,
+				F25494492564DECF0096074D /* PostViewController.swift in Sources */,
+				F254944B2564DEEF0096074D /* SettingViewController.swift in Sources */,
+				F25494432564DE730096074D /* LoginViewController.swift in Sources */,
 				F254942F2564DD390096074D /* AppDelegate.swift in Sources */,
 				F25494312564DD390096074D /* SceneDelegate.swift in Sources */,
 			);
@@ -294,7 +314,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.mika.yamashita.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -312,7 +332,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.mika.yamashita.Instagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
