@@ -15,6 +15,9 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     // 投稿データを格納する配列
     var postArray:[PostData] = []
     
+    var commentData = [String]()
+    var captionData:String = ""
+    
     // Firestoreのリスナー
     var listener : ListenerRegistration!
     
@@ -27,6 +30,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // カスタムセルを登録する
         let nib = UINib(nibName: "PostTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,6 +81,13 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         // セル内のボタンのアクションをソースコードで設定する
         cell.likeButton.addTarget(self, action: #selector(handleButton(_:forEvent:)), for: .touchUpInside)
         
+        cell.commentButton.addTarget(self, action: #selector(commentButton(_:forEvent:)), for: .touchUpInside)
+        
+        cell.commentNumberLabel.isUserInteractionEnabled = true
+        cell.commentNumberLabel.addGestureRecognizer(UITapGestureRecognizer(
+        target: self,
+        action: #selector(tapLabel(_:))))
+        
         return cell
     }
     
@@ -97,7 +108,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             // 更新データを作成する
             var updateValue:FieldValue
             if postData.isLiked{
-                // すでにいいねをしている場合は、いいね介助のためmyidを取り除く更新でーたを作成
+                // すでにいいねをしている場合は、いいね介助のためmyidを取り除く更新データを作成
                 updateValue = FieldValue.arrayRemove([myid])
             }else{
                 // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
@@ -107,6 +118,56 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             postRef.updateData(["likes":updateValue])
         }
+    }
+    
+    @objc func commentButton(_ sender:UIButton,forEvent event:UIEvent){
+        print("DEBUG_PRINT:commentボタンがタップされました。")
+        
+        // タップされたセルのインデックスを求める
+        let touch = event.allTouches?.first
+        let point = touch!.location(in: self.tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        
+        // コメントデータを取得
+        let commentData = tableView.cellForRow(at: indexPath!)?.viewWithTag(4) as! UITextField
+        print(commentData.text!)
+        
+        // 配列からタップされたインデックスのデータを取り出す
+        let postData = postArray[indexPath!.row]
+        
+        // 更新データを作成する
+        let comment = "\(postData.name!):\(commentData.text!)"
+        
+        // commentに更新データを書き込む
+        let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+        postRef.updateData(["comment":FieldValue.arrayUnion([comment])])
+    
+    }
+    
+    @objc func tapLabel(_ sender:UITapGestureRecognizer){
+        print("DEBUG_PRINT:コメント件数ラベルがタップされました。")
+        
+        let point = sender.location(in: tableView)
+        let indexPath  = tableView.indexPathForRow(at: point)
+        commentData = postArray[indexPath!.row].comment
+        
+        if commentData.count != 0{
+            captionData = postArray[indexPath!.row].caption!
+            
+            performSegue(withIdentifier: "commentList", sender: nil)
+        }
+        
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let commentViewController:CommentViewController = segue.destination as! CommentViewController
+        
+        if segue.identifier == "commentList"{
+            
+            commentViewController.commentData = commentData
+            commentViewController.captionData = captionData
+        }
+        
     }
 
     /*

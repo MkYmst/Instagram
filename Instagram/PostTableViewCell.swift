@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseUI
+import Firebase
 
 class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var postImageView: UIImageView!
@@ -15,6 +16,10 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var captionLabel: UILabel!
+    @IBOutlet weak var commentNumberLabel: UILabel!
+    @IBOutlet weak var LatestCommentLabel: UILabel!
+    @IBOutlet weak var commentInputField: UITextField!
+    @IBOutlet weak var commentButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -58,5 +63,18 @@ class PostTableViewCell: UITableViewCell {
             let buttonImage = UIImage(named: "like_none")
             self.likeButton.setImage(buttonImage, for: .normal)
         }
+        
+        //コメント数の表示
+        let commentNumber = postData.comment.count
+        let nums = commentNumber - 1
+        if commentNumber == 0{
+            self.commentNumberLabel.text = ""
+            self.LatestCommentLabel.text = ""
+        }else{
+            self.commentNumberLabel.text = "コメント\(commentNumber)件を全て見る"
+            self.LatestCommentLabel.text = "\(postData.comment[nums])"
+            self.commentInputField.text = ""
+        }
+        print(commentNumber)
     }
 }

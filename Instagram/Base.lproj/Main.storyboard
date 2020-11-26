@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ホーム-->
+        <!--タイムライン-->
         <scene sceneID="vWy-LS-eaP">
             <objects>
                 <viewController storyboardIdentifier="Home" id="rj1-zd-WEQ" customClass="HomeViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M7e-lc-ISO">
-                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                         </subviews>
@@ -29,14 +29,75 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uEO-Jp-Cap"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="ホーム" image="home" id="afv-NI-Yfw"/>
+                    <navigationItem key="navigationItem" title="タイムライン" id="ZFl-gX-ozc"/>
                     <connections>
                         <outlet property="tableView" destination="M7e-lc-ISO" id="x3Q-ol-OkM"/>
+                        <segue destination="eVo-gY-uxe" kind="show" identifier="commentList" id="vTY-cm-e3I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zAf-Bl-CP0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-803" y="846"/>
+            <point key="canvasLocation" x="-584.05797101449275" y="859.82142857142856"/>
+        </scene>
+        <!--コメント-->
+        <scene sceneID="oPk-FR-G3j">
+            <objects>
+                <viewController id="eVo-gY-uxe" customClass="CommentViewController" customModule="Instagram" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mZx-nj-YGl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="8D5-R6-me7">
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="664.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="HJI-0q-Cpi" style="IBUITableViewCellStyleDefault" id="hbt-jh-gCT">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hbt-jh-gCT" id="cPd-dq-S6B">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HJI-0q-Cpi">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FWW-sb-fdK">
+                                <rect key="frame" x="10" y="108" width="404" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="FWW-sb-fdK" firstAttribute="leading" secondItem="WgA-17-pmG" secondAttribute="leading" constant="10" id="4at-c0-Lyh"/>
+                            <constraint firstItem="8D5-R6-me7" firstAttribute="top" secondItem="FWW-sb-fdK" secondAttribute="bottom" constant="20" id="AaR-47-eOv"/>
+                            <constraint firstItem="WgA-17-pmG" firstAttribute="trailing" secondItem="8D5-R6-me7" secondAttribute="trailing" id="F9v-pJ-Bb3"/>
+                            <constraint firstItem="8D5-R6-me7" firstAttribute="leading" secondItem="WgA-17-pmG" secondAttribute="leading" id="Zqo-EO-vMf"/>
+                            <constraint firstItem="FWW-sb-fdK" firstAttribute="top" secondItem="WgA-17-pmG" secondAttribute="top" constant="20" id="inT-pH-ht9"/>
+                            <constraint firstItem="WgA-17-pmG" firstAttribute="bottom" secondItem="8D5-R6-me7" secondAttribute="bottom" id="oWh-Tm-I88"/>
+                            <constraint firstItem="WgA-17-pmG" firstAttribute="trailing" secondItem="FWW-sb-fdK" secondAttribute="trailing" id="v9i-0V-GxS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="WgA-17-pmG"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="コメント" id="QZj-Y2-jjf"/>
+                    <connections>
+                        <outlet property="CaptionLabel" destination="FWW-sb-fdK" id="L67-Jv-l3r"/>
+                        <outlet property="tableView" destination="8D5-R6-me7" id="L5h-ik-iS1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d4p-bW-lQn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="239.13043478260872" y="849.77678571428567"/>
         </scene>
         <!--投稿-->
         <scene sceneID="zMc-v5-aAy">
@@ -92,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xwc-Ev-vru" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132" y="846"/>
+            <point key="canvasLocation" x="1042.0289855072465" y="845.75892857142856"/>
         </scene>
         <!--Post View Controller-->
         <scene sceneID="h2u-9x-Dny">
@@ -213,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hye-l1-Ilz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032" y="846"/>
+            <point key="canvasLocation" x="1942.0289855072465" y="845.75892857142856"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="d7j-YM-jZX">
@@ -304,7 +365,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rj1-zd-WEQ" kind="relationship" relationship="viewControllers" id="ehd-TE-oIk"/>
+                        <segue destination="cqa-aE-it7" kind="relationship" relationship="viewControllers" id="ehd-TE-oIk"/>
                         <segue destination="L2f-Ih-za5" kind="relationship" relationship="viewControllers" id="S14-9J-1ZQ"/>
                         <segue destination="lMl-Gc-rbv" kind="relationship" relationship="viewControllers" id="6YH-5R-gEl"/>
                     </connections>
@@ -312,6 +373,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btK-N4-C1S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="128.57142857142856"/>
+        </scene>
+        <!--ホーム-->
+        <scene sceneID="tec-le-75M">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cqa-aE-it7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="ホーム" image="home" id="afv-NI-Yfw"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0BG-pA-QaX">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rj1-zd-WEQ" kind="relationship" relationship="rootViewController" id="nKV-FC-xy3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZOl-sG-GPQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1494.2028985507247" y="859.82142857142856"/>
         </scene>
     </scenes>
     <resources>
