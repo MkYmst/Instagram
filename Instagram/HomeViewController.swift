@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     
     // 投稿データを格納する配列
@@ -17,12 +18,17 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     var commentData = [String]()
     var captionData:String = ""
+    var idData:String = ""
     
     // Firestoreのリスナー
     var listener : ListenerRegistration!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 背景をタップしたらdismissKeyboardメソッドを呼ぶように設定する
+        let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(dismissKeyboard))
+        self.view.addGestureRecognizer(tapGesture)
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -35,6 +41,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
         print("DEBUG_PRINT:viewWillAppear")
         
         if Auth.auth().currentUser != nil{
@@ -67,6 +74,11 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
                 tableView.reloadData()
             }
         }
+    }
+    
+    @objc func dismissKeyboard(){
+        // キーボードを閉じる
+        view.endEditing(true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,7 +120,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             // 更新データを作成する
             var updateValue:FieldValue
             if postData.isLiked{
-                // すでにいいねをしている場合は、いいね介助のためmyidを取り除く更新データを作成
+                // すでにいいねをしている場合は、いいね解除のためmyidを取り除く更新データを作成
                 updateValue = FieldValue.arrayRemove([myid])
             }else{
                 // 今回新たにいいねを押した場合は、myidを追加する更新データを作成
@@ -130,7 +142,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         
         // コメントデータを取得
         let commentData = tableView.cellForRow(at: indexPath!)?.viewWithTag(4) as! UITextField
-        print(commentData.text!)
+        //print(commentData.text!)
         
         // 配列からタップされたインデックスのデータを取り出す
         let postData = postArray[indexPath!.row]
@@ -150,6 +162,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
         let point = sender.location(in: tableView)
         let indexPath  = tableView.indexPathForRow(at: point)
         commentData = postArray[indexPath!.row].comment
+        idData = postArray[indexPath!.row].id
         
         if commentData.count != 0{
             captionData = postArray[indexPath!.row].caption!
@@ -166,6 +179,7 @@ class HomeViewController: UIViewController,UITableViewDataSource,UITableViewDele
             
             commentViewController.commentData = commentData
             commentViewController.captionData = captionData
+            commentViewController.idData = idData
         }
         
     }

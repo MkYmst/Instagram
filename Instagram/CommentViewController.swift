@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CommentViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -15,6 +16,7 @@ class CommentViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     var commentData = [String]()
     var captionData:String = ""
+    var idData:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +26,11 @@ class CommentViewController: UIViewController,UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         
         self.CaptionLabel.text = captionData
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     
     // データの数（＝セルの数）を返すメソッド
@@ -38,6 +45,29 @@ class CommentViewController: UIViewController,UITableViewDelegate, UITableViewDa
         cell.textLabel!.text = commentData[indexPath.row]
 
         return cell
+    }
+    
+    // セルが削除が可能なことを伝えるメソッド
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
+        return .delete
+    }
+
+    // Delete ボタンが押された時に呼ばれるメソッド
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {            
+            // 更新データを作成する
+            let deleteComment = commentData[indexPath.row]
+            var updateValue:FieldValue
+            updateValue = FieldValue.arrayRemove([deleteComment])
+        
+            // Commentに更新データを書き込む
+            let postRef = Firestore.firestore().collection(Const.PostPath).document(idData)
+            postRef.updateData(["comment":updateValue])
+            
+            commentData.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
     //ヘッダ(上の線)
